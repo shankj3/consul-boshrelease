@@ -1,0 +1,2 @@
+bosh deploy -d consulagent manifests/consul_agent.yml -o manifests/operators/firsttime.yml --vars-store consul-secrets.yml
+bosh deploy -d consul manifests/consul.yml -o manifests/operators/firsttime.yml --vars-store consul-secrets.yml

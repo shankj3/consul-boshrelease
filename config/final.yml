@@ -1,6 +1,6 @@
 ---
 blobstore:
-  provider: s3
+  provider: local
   options:
-    bucket_name: consul-boshrelease
+    blobstore_path: /Users/jesseshank/infrastructure/release_bosh/consul-boshrelease/blobs
 final_name: consul

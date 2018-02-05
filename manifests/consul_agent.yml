@@ -1,30 +1,33 @@
 ---
-name: consul
+name: consulagent
 
 # update: section explicitly missing so operator must choose operators/firsttime.yml or operators/existing.yml
 
 instance_groups:
 - name: consul
   azs: [z1]
-  instances: 3
+  instances: 1
   vm_type: default
   stemcell: default
-  persistent_disk: 10240
+  persistent_disk_type: 5GB 
   networks: [{name: default}]
   jobs:
   - release: consul
     name: consul
-    provides:
-      consul_servers:
-        as: consul_leaders
-        shared: true
+    # provides:
+    #   consul_servers:
+    #     as: consul_leaders
+    #     shared: true
     consumes:
-      consul_servers: { from: consul_leaders }
+      consul_servers: { from: consul_leaders, deployment: consul}
     properties:
       consul:
         ssl_ca: ((consul-ca.ca))
         ssl_cert: ((consul-tls.certificate))
         ssl_key: ((consul-tls.private_key))
+        server: false
+        verify_incoming: false
+        http_port: 8501
         domain: consul.metaverse.l11.com
 
 variables:
@@ -51,6 +54,7 @@ stemcells:
   version: latest
 
 # update: section explicitly missing so operator must choose operators/firsttime.yml or operators/existing.yml
+
 
 releases:
 - name: consul
