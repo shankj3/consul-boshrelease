@@ -29,7 +29,7 @@
     },
     disable_update_check: true
   }
-  
+
   if p('consul.node_name', nil) 
     config[:node_name] = p('consul.node_name')
   else
@@ -46,12 +46,8 @@
     config[:ca_file] = '/var/vcap/jobs/consul/consul/ca.cert'
     config[:cert_file] = '/var/vcap/jobs/consul/consul/consul.cert'
     config[:key_file] = '/var/vcap/jobs/consul/consul/consul.key'
-    config[:ports][:https] = 8500
-    config[:ports][:http] = -1
-  end
-
-  if p('consul.http_port', nil)
-    config[:ports][:http] = p('consul.http_port')
+    config[:ports][:https] = p('consul.https_port', 8501)
+    config[:ports][:http] = p('consul.http_port', 8500)
   end
 
   if p('consul.encrypt', nil)

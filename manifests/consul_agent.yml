@@ -27,7 +27,6 @@ instance_groups:
         ssl_key: ((consul-tls.private_key))
         server: false
         verify_incoming: false
-        http_port: 8501
         domain: consul.metaverse.l11.com
 
 variables:
@@ -58,4 +57,4 @@ stemcells:
 
 releases:
 - name: consul
-  version: 24.0.0+dev.6
+  version: 24.0.0+dev.7
